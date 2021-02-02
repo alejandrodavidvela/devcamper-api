@@ -14,7 +14,7 @@ exports.getBootcamps = async (req, res, next) => {
     
 }
 
-// @desc   Get bootcamp by id
+// @desc   Get single bootcamp
 // @route  GET /api/v1/bootcamps/:id
 // @access Public
 exports.getBootcamp = async (req, res, next) => {
@@ -24,8 +24,9 @@ exports.getBootcamp = async (req, res, next) => {
             return res.status(400).json({success: false})
         }
         res.status(200).json({success: true, data: bootcamp})
-    } catch (error) {
-        res.status(400).json({success: false})
+    } catch (err) {
+        // res.status(400).json({success: false})
+        next(err)
     }
     
 }
