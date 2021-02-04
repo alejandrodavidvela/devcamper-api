@@ -1,9 +1,12 @@
 const express = require('express')
+const { protect } = require('../middleware/auth')
 
 const { 
     getCourses,
     getCourse,
-    addCourse
+    addCourse,
+    updateCourse,
+    deleteCourse
 } = require('../controllers/courses')
 
 const Course = require('../models/Course')
@@ -17,9 +20,11 @@ router
         path: 'bootcamp',
         select: 'name description'
     }), getCourses)
-    .post(addCourse)
+    .post(protect, addCourse)
 router
     .route('/:id')
     .get(getCourse)
+    .put(protect, updateCourse)
+    .delete(protect, deleteCourse)
 
 module.exports = router
